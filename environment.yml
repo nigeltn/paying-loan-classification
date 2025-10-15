@@ -1,0 +1,13 @@
+name: paying_loan_classification
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pandas
+  - scikit-learn
+  - imbalanced-learn
+  - xgboost
+  - matplotlib
+  - seaborn
+  - jupyter
+  - joblib
