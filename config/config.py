@@ -1,9 +1,7 @@
 from typing import List, Dict, Any
 
-# --- File Paths ---
 DATA_PATH: str = "data/raw/raw_dataset.csv"
 
-# Paths for saving models and figures
 MODEL_PATHS: Dict[str, str] = {
     "DecisionTree": "models/decision_tree.joblib",
     "RandomForest": "models/random_forest.joblib",
@@ -19,8 +17,8 @@ FIGURE_PATHS: Dict[str, str] = {
 # --- Feature Engineering Parameters ---
 TARGET_VARIABLE: str = "label"
 FEATURES_TO_DROP: List[str] = ["customer_id"]
-TOP_FEATURES_CORR: int = 5
-TOP_FEATURES_RFE: int = 2
+TOP_FEATURES_CORR: int = 50
+TOP_FEATURES_RFE: int = 25
 
 # --- Data Processing Parameters ---
 TEST_SIZE: float = 0.3
@@ -29,7 +27,7 @@ RANDOM_STATE: int = 42
 # --- Model Parameters ---
 # Decision Tree
 DT_PARAMS: Dict[str, Any] = {
-    'max_depth': 7,
+    'max_depth': 10,
     'max_features': 'sqrt',
     'random_state': RANDOM_STATE
 }
@@ -44,11 +42,12 @@ RF_PARAMS: Dict[str, Any] = {
 # XGBoost
 XGB_PARAMS: Dict[str, Any] = {
     'eta': 0.07,
-    'objective': 'multi:softprob',
+    'objective': 'multi:softprob',  
     'num_class': 2,
-    'device': 'cuda',
+    'device': 'cpu',
     'max_depth': 10,
-    'verbosity': 1,
-    'num_parallel_tree': 20
+    'num_parallel_tree': 5,
+    'scale_pos_weight': 4.584297520661157,   
+    'random_state': RANDOM_STATE,
 }
-XGB_STEPS: int = 400
+XGB_STEPS: int = 500

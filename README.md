@@ -69,11 +69,9 @@ The performance of the models on the test set is summarized below:
 
 | Model          | Accuracy | F1-Score |
 |----------------|----------|----------|
-| Decision Tree  | 0.85     | 0.60     |
-| Random Forest  | 0.88     | 0.65     |
-| XGBoost        | 0.90     | 0.70     |
-
-As shown in the table, the XGBoost model delivered the best performance, demonstrating its effectiveness in handling this classification task.
+| Decision Tree  | 0.81     | 0.79     |
+| Random Forest  | 0.86     | 0.84     |
+| XGBoost        | 0.89     | 0.89     |
 
 ## How to Run
 To replicate this project, follow these steps:
@@ -84,7 +82,7 @@ To replicate this project, follow these steps:
 2. Set up the environment: Ensure you have Python and Conda installed. Create and activate the Conda environment using the provided environment.yml file.
     ```bash
     conda env create -f environment.yml  
-    conda activate customer_behavior_prediction
+    conda activate paying_loan_classification
     ```
 3. Run the pipeline:
    ```bash
