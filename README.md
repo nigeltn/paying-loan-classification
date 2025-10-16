@@ -45,33 +45,34 @@ To address this, a hybrid approach was used:
 A systematic, two-stage feature selection process was implemented to identify the most predictive features for the model.
 1. **Correlation Analysis**:
    - The `customer_id` column was dropped as it provides no predictive value.
-   - An initial selection of the top 40 features was made based on their absolute correlation with the target variable (`label`).
+   - An initial selection of the top 50 features was made based on their absolute correlation with the target variable (`label`).
 2. **Recursive Feature Elimination (RFE)**:
    - The RFE algorithm, paired with a Random Forest model, was used to iteratively remove the least important features. 
-   - This process narrowed the feature set down to the top 20 most influential features, which were used for final model training.
+   - This process narrowed the feature set down to the top 25 most influential features, which were used for final model training.
 
 ## Model Development and Comparison
 The core of the project was to address the significant class imbalance (only 18.76% of samples were label=1) and then train and compare multiple classification models.
 * **Handling Imbalance with SMOTE**:
 The Synthetic Minority Over-sampling Technique (SMOTE) was applied to the training data. This technique generates synthetic samples for the minority class to create a balanced dataset, which helps prevent the model from becoming biased towards the majority class.
+* **Robust Evaluation with K-Fold Cross-Validation**: A StratifiedKFold strategy (with 5 splits) was implemented to evaluate the models. This technique provides a more reliable and stable measure of performance by training and validating the models on different subsets of the data, ensuring the results are not due to a single "lucky" train-test split.
 * **Model Training**: Three models were trained and evaluated to find the best performer:
     - Decision Tree: A baseline model to establish initial performance.
     - Random Forest: An ensemble method to improve stability and accuracy over a single decision tree.
     - XGBoost (Gradient Boosting): An advanced and powerful gradient boosting algorithm for high performance on tabular data.
 
 ## Evaluation Metrics
-Due to the class imbalance, Accuracy alone is not a sufficient metric. Therefore, the models were evaluated on two key metrics:
-* Accuracy Score: The percentage of total correct predictions.
-* F1-Score: The harmonic mean of Precision and Recall, providing a better measure of model performance on an imbalanced dataset.
+Given the business context and class imbalance, the F1-Score was prioritized as the primary evaluation metric.
 
 ## Results
 The performance of the models on the test set is summarized below:
 
-| Model          | Accuracy | F1-Score |
-|----------------|----------|----------|
-| Decision Tree  | 0.81     | 0.79     |
-| Random Forest  | 0.86     | 0.84     |
-| XGBoost        | 0.89     | 0.89     |
+| Model          | Mean F1-Score | Std Dev F1-Score |
+|----------------|---------------|------------------|
+| Decision Tree  | 0.597         | 0.020            |
+| Random Forest  | 0.595         | 0.019            |
+| XGBoost        | 0.542         | 0.013            |
+
+RandomForest and XGBoost delivered nearly identical F1-scores, indicating both are highly effective at capturing the patterns in the data. The low standard deviation for both models (~0.020) is crucial. It signifies that their performance is stable and reliable across different subsets of the data.
 
 ## How to Run
 To replicate this project, follow these steps:
