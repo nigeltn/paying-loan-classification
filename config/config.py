@@ -41,13 +41,15 @@ RF_PARAMS: Dict[str, Any] = {
 
 # XGBoost
 XGB_PARAMS: Dict[str, Any] = {
-    'eta': 0.07,
-    'objective': 'multi:softprob',  
-    'num_class': 2,
-    'device': 'cpu',
-    'max_depth': 10,
-    'num_parallel_tree': 5,
-    'scale_pos_weight': 4.584297520661157,   
+    'objective': 'binary:logistic',
+    'eval_metric': 'auc',
+    'eta': 0.01,
+    'max_depth': 5,
+    'min_child_weight': 1,
+    'subsample': 0.8,
+    'colsample_bytree': 0.8,
+    'gamma': 0.1,
     'random_state': RANDOM_STATE,
+    'device': 'cpu',
 }
-XGB_STEPS: int = 500
+XGB_STEPS: int = 1500
