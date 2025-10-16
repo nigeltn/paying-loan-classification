@@ -16,7 +16,7 @@ def evaluate_model(model: Any, model_name: str, X_test: pd.DataFrame, y_test: pd
     if isinstance(model, xgb.Booster):
         dtest = xgb.DMatrix(X_test, label=y_test)
         y_pred_prob = model.predict(dtest)
-        y_pred = np.asarray([np.argmax(line) for line in y_pred_prob])
+        y_pred = (y_pred_prob > 0.5).astype(int)
     else: 
         y_pred = model.predict(X_test)
 
